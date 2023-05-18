@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/IGORSERGEY/AQA-diploma/issues"
   },
-  "homepage": "https://github.com/IGORSERGEY/AQA-diploma#readme"
+  "homepage": "https://github.com/IGORSERGEY/AQA-diploma#readme",
+  "dependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
 }
