@@ -1,0 +1,19 @@
+{
+  "name": "aqa-diploma",
+  "version": "1.0.0",
+  "description": "Automation test framework for diploma project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IGORSERGEY/AQA-diploma.git"
+  },
+  "author": "Igor Sergey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IGORSERGEY/AQA-diploma/issues"
+  },
+  "homepage": "https://github.com/IGORSERGEY/AQA-diploma#readme"
+}
