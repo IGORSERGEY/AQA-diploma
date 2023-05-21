@@ -1,4 +1,5 @@
 import { regex } from '../helpers/constants';
+import { ERROR_MESSAGES } from '../helpers/types';
 
 export class RegistrationForm {
     constructor(
@@ -13,29 +14,27 @@ export class RegistrationForm {
         const errorMessage: string[] = [];
 
         if (!regex.fullName.test(this.name)) {
-            errorMessage.push('Incorrect name! Only alphabetic characters are allowed');
+            errorMessage.push(ERROR_MESSAGES.INVALID_NAME);
         }
 
         if (!regex.fullName.test(this.surName)) {
-            errorMessage.push('Incorrect surname! Only alphabetic characters are allowed');
+            errorMessage.push(ERROR_MESSAGES.INVALID_SURNAME);
         }
 
         if (!regex.email.test(this.email)) {
-            errorMessage.push('Incorrect email!');
+            errorMessage.push(ERROR_MESSAGES.INVALID_EMAIL);
         }
 
         if (!regex.password.test(this.password)) {
-            errorMessage.push(
-                'Incorrect password! The password must contain at least 8 characters, including numbers, lowercase and uppercase letters.'
-            );
+            errorMessage.push(ERROR_MESSAGES.INVALID_PASSWORD);
         }
 
         if (this.age <= 18 || this.age >= 120) {
-            errorMessage.push('Incorrect age! Age must be a number between 18 and 120 years');
+            errorMessage.push(ERROR_MESSAGES.INVALID_AGE);
         }
 
         if (this.patronymic && !regex.fullName.test(this.patronymic)) {
-            errorMessage.push('Incorrect patronymic! Only alphabetic characters are allowed.');
+            errorMessage.push(ERROR_MESSAGES.INVALID_PATRONYMIC);
         }
 
         if (errorMessage.length > 0) {
