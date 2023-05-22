@@ -4,7 +4,7 @@ import { positiveTestData } from '../test-data/registration_form.test-data';
 
 describe('Positive tests for registration form', () => {
     positiveTestData.forEach(({ testName, registrationFormData, expectedResult }, index) => {
-        it(`${index}. ${testName}`, () => {
+        it(`${index + 1}. ${testName}`, () => {
             const validRegistrationForm = new RegistrationForm(
                 registrationFormData.name,
                 registrationFormData.surName,
