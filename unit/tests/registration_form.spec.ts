@@ -1,6 +1,7 @@
 import { expect } from '@jest/globals';
 import { RegistrationForm } from '../classes/registration_form';
 import { positiveTestData } from '../test-data/registration_form.test-data';
+import { logger } from '../config/logger.config';
 
 describe('Positive tests for registration form', () => {
     positiveTestData.forEach(({ testName, registrationFormData, expectedResult }, index) => {
@@ -13,6 +14,10 @@ describe('Positive tests for registration form', () => {
                 registrationFormData.age,
                 registrationFormData.patronymic
             );
+            logger.info(
+                `${index + 1} Trying to validate registration form: \n ${JSON.stringify(validRegistrationForm)}`
+            );
+            // logger.info();
             expect(validRegistrationForm.validateParameters()).toBe(expectedResult);
         });
     });
