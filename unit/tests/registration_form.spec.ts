@@ -1,6 +1,6 @@
 import { expect } from '@jest/globals';
 import { RegistrationForm } from '../classes/registration_form';
-import { positiveTestData } from '../test-data/registration_form.test-data';
+import { ERROR_FOR_ALL_INVALID, negativeTestData, positiveTestData } from '../test-data/registration_form.test-data';
 import { logger } from '../config/logger.config';
 
 describe('Positive tests for registration form', () => {
@@ -15,19 +15,41 @@ describe('Positive tests for registration form', () => {
                 registrationFormData.patronymic
             );
             logger.info(
-                `${index + 1} Trying to validate registration form: \n ${JSON.stringify(validRegistrationForm)}`
+                `Positive test ${index + 1}: Trying to validate registration form: \n ${JSON.stringify(
+                    validRegistrationForm
+                )}`
             );
-            // logger.info();
+            logger.info(`The result is: \n ${validRegistrationForm.validateParameters()}`);
             expect(validRegistrationForm.validateParameters()).toBe(expectedResult);
         });
     });
 });
 
-// describe('Negative tests for registration form', () => {
-//     it('Should accept valid values', () => {
-//         const rf = new RegistrationForm('Ig12or', '', 'example@ex.com', 'Pa$$w0rd', 25, 'Dmitrievich');
-//         expect(() => {
-//             rf.validateParameters();
-//         }).toThrow('name');
-//     });
-// });
+describe('Negative tests for registration form', () => {
+    negativeTestData.forEach(({ testName, registrationFormData }, index) => {
+        it(`${index + 1}. ${testName}`, () => {
+            const invalidRegistrationForm = new RegistrationForm(
+                registrationFormData.name,
+                registrationFormData.surName,
+                registrationFormData.email,
+                registrationFormData.password,
+                registrationFormData.age,
+                registrationFormData.patronymic
+            );
+            logger.info(
+                `Negative test ${index + 1}: Trying to validate registration form: \n ${JSON.stringify(
+                    invalidRegistrationForm
+                )}`
+            );
+            expect(() => {
+                invalidRegistrationForm.validateParameters();
+            }).toThrow('Incorrect');
+        });
+    });
+    it(`Should throw multiply error message on the form with all invalid fields`, () => {
+        const emptyRegistrationForm = new RegistrationForm('', '', '', '', 1, '123');
+        expect(() => {
+            emptyRegistrationForm.validateParameters();
+        }).toThrow(ERROR_FOR_ALL_INVALID);
+    });
+});
