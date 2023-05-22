@@ -10,6 +10,10 @@ export class RegistrationForm {
         protected age: number,
         protected patronymic?: string
     ) {}
+
+    public static readonly maxAge = 120;
+    public static readonly minAge = 18;
+
     validateParameters(): string {
         const errorMessage: string[] = [];
 
@@ -29,7 +33,7 @@ export class RegistrationForm {
             errorMessage.push(ERROR_MESSAGES.INVALID_PASSWORD);
         }
 
-        if (this.age < 18 || this.age > 120) {
+        if (this.age < RegistrationForm.minAge || this.age > RegistrationForm.maxAge) {
             errorMessage.push(ERROR_MESSAGES.INVALID_AGE);
         }
 
