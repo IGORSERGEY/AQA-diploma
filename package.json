@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/IGORSERGEY/AQA-diploma#readme",
     "dependencies": {
+        "log4js": "^6.9.1",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4"
     },
