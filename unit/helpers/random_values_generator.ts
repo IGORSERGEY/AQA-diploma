@@ -9,7 +9,7 @@ export class RandomGenerator {
         return new RandExp(/^[A-Za-z]{1,32}$/).gen();
     }
     static get validEmail() {
-        return new RandExp(/^[\w-\.]+@([\w-]+\.)+[^\s|\d@]{2,4}$/).gen();
+        return new RandExp(/^[\w-\.]{1,16}@([\w-]{1,16}\.)[^\s|\d@]{2,4}$/).gen();
     }
     static get validPassword() {
         return new RandExp(
