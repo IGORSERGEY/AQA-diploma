@@ -1,5 +1,6 @@
 {
-    "testMatch": ["**/hw17/jest-test/*.spec.ts"],
+    "testMatch": ["**/unit/tests/registration_form.spec.ts"],
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageDirectory": "unit/assets/coverage"
 }
