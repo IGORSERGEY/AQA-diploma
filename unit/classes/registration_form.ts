@@ -10,7 +10,7 @@ export class RegistrationForm {
         protected age: number,
         protected patronymic?: string
     ) {}
-    validateParameters(): void {
+    validateParameters(): string {
         const errorMessage: string[] = [];
 
         if (!regex.fullName.test(this.name)) {
@@ -29,7 +29,7 @@ export class RegistrationForm {
             errorMessage.push(ERROR_MESSAGES.INVALID_PASSWORD);
         }
 
-        if (this.age <= 18 || this.age >= 120) {
+        if (this.age < 18 || this.age > 120) {
             errorMessage.push(ERROR_MESSAGES.INVALID_AGE);
         }
 
@@ -40,5 +40,6 @@ export class RegistrationForm {
         if (errorMessage.length > 0) {
             throw new Error(errorMessage.join('\n'));
         }
+        return 'Validation complete successful!';
     }
 }
