@@ -35,4 +35,9 @@ export class RandomGenerator {
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[A-Za-z0-9@$!%^*?&])(1)[A-Za-z0-9@$!%+^*?&]{7}$/
         ).gen();
     }
+    static get shortInvalidPassword() {
+        return new RandExp(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[A-Za-z0-9@$!%^*?&])(1)[A-Za-z0-9@$!%+^*?&]{6}$/
+        ).gen();
+    }
 }
