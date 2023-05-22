@@ -4,7 +4,8 @@
     "description": "Automation test framework for diploma project",
     "main": "index.js",
     "scripts": {
-        "unit:test": "jest --config='unit/jest.config.json' --coverage"
+        "unit:test": "jest --config='unit/jest.config.json' --coverage",
+        "API:test": "jest --config='api/jest.config.json'"
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,7 @@
     },
     "devDependencies": {
         "@types/jest": "^29.5.1",
+        "axios": "^1.4.0",
         "jest": "^29.5.0",
         "prettier": "2.8.8",
         "randexp": "^0.5.3",
