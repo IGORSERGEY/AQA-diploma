@@ -30,7 +30,7 @@ export class RequestBodyGenerator {
                 email: `${randomString.gen()}@reqres.in`,
                 first_name: randomString.gen(),
                 last_name: randomString.gen(),
-                avatar: 'https://reqres.in/img/faces/3-image.jpg',
+                avatar: `https://reqres.in/img/faces/${userId ? userId : randomUserIdNumber}-image.jpg`,
             },
         };
     }
