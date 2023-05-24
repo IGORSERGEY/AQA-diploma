@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "unit:test": "jest --config='unit/jest.config.json' --coverage",
-        "API:test": "jest --config='api/jest.config.json'"
+        "API:test": "jest --config='api/jest.config.json'",
+        "e2e:test": "playwright test --config=e2e/config/playwright.config.ts"
     },
     "repository": {
         "type": "git",
