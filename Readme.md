@@ -9,9 +9,9 @@ All tests are placed in the separate folders
 
 ![Untitled](README_IMAGES/root_dir.png)
 
-`.vscode`, `node_modules` were added to `.gitignore` file
+`.vscode`, `node_modules` and `**/assets` were added to `.gitignore` file
 
-<h2 align='center'>The unit tests:</h1>
+## The unit tests:
 
 ![Untitled](README_IMAGES/unit_dir.png)
 
@@ -19,7 +19,7 @@ All tests are placed in the separate folders
 
 For generating random values **randexp** npm was used (random_values_generator.ts)
 
-<h2 align='center'>The API tests:<h1>
+## The API tests:
 
 ![Untitled](README_IMAGES/api_dir.png)
 
