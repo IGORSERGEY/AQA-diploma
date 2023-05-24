@@ -1,8 +1,12 @@
+import { RegistrationForm } from '../classes/registration_form';
 import { expectedValidationResult } from '../helpers/constants';
 import { RandomGenerator } from '../helpers/random_values_generator';
 import { ERROR_MESSAGES } from '../helpers/types';
 
 export const ERROR_FOR_ALL_INVALID = `${ERROR_MESSAGES.INVALID_NAME}\n${ERROR_MESSAGES.INVALID_SURNAME}\n${ERROR_MESSAGES.INVALID_EMAIL}\n${ERROR_MESSAGES.INVALID_PASSWORD}\n${ERROR_MESSAGES.INVALID_AGE}\n${ERROR_MESSAGES.INVALID_PATRONYMIC}`;
+
+export const fullInvalidRegistrationForm = new RegistrationForm('', '', '', '', 1, '123');
+
 export const positiveTestData = [
     {
         testName: 'All fields are valid',
@@ -180,4 +184,3 @@ export const negativeTestData = [
         },
     },
 ];
-

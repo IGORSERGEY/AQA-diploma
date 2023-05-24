@@ -1,6 +1,11 @@
 import { expect } from '@jest/globals';
 import { RegistrationForm } from '../classes/registration_form';
-import { ERROR_FOR_ALL_INVALID, negativeTestData, positiveTestData } from '../test-data/registration_form.test-data';
+import {
+    ERROR_FOR_ALL_INVALID,
+    fullInvalidRegistrationForm,
+    negativeTestData,
+    positiveTestData,
+} from '../test-data/registration_form.test-data';
 import { logger } from '../config/logger.config';
 
 describe('Positive tests for registration form', () => {
@@ -47,9 +52,8 @@ describe('Negative tests for registration form', () => {
         });
     });
     it(`Should throw multiply error message on the form with all invalid fields`, () => {
-        const emptyRegistrationForm = new RegistrationForm('', '', '', '', 1, '123');
         expect(() => {
-            emptyRegistrationForm.validateParameters();
+            fullInvalidRegistrationForm.validateParameters();
         }).toThrow(ERROR_FOR_ALL_INVALID);
     });
 });
