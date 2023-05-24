@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { HomePage } from '../src/home_page';
 import { PageFactory } from '../src/page_factory';
 import { PAGES } from '../helpers/types';
-import { HEADER_SECTIONS, PARTNERS_LINKS, RIGHT_MENU_SECTIONS } from '../helpers/constants';
+import { HEADER_SECTIONS, COMPANIES_LINKS, RIGHT_MENU_SECTIONS } from '../helpers/constants';
 import { DocsPage } from '../src/docs_page';
 
 test.describe.configure({ mode: 'serial' });
@@ -16,24 +16,24 @@ test.describe('Tests for playwright.dev home page', () => {
         homePage = PageFactory.getPage(page, PAGES.HOME) as HomePage;
         await homePage.openPage();
     });
-    test('Can toggle theme with button', async () => {
+    test('Can toggle theme with button in header', async () => {
         const themeBeforeToggle = await homePage.getTheme();
         await homePage.toggleTheme();
         const themeAfterToggle = await homePage.getTheme();
         expect(themeBeforeToggle).not.toBe(themeAfterToggle);
     });
-    test('The partners links are correct:', async () => {
-        for (let [index, link] of PARTNERS_LINKS.entries()) {
+    test('The buttons in "Chosen by companies" section links are correct', async () => {
+        for (let [index, link] of COMPANIES_LINKS.entries()) {
             expect(await homePage.getPartnersButtonLinksByNumber(index + 1)).toEqual(link);
         }
     });
-    test('Can open search field by hotkeys', async () => {
+    test('Can open search bar by hotkeys', async () => {
         await homePage.performSearch();
         expect(await homePage.isSearchBarVisible()).toBeTruthy();
     });
 });
 
-test.describe('Tests for docks page', () => {
+test.describe('Tests for "docs" page', () => {
     test.beforeAll(async ({ browser }) => {
         const page = await browser.newPage();
         docsPage = PageFactory.getPage(page, PAGES.DOCKS) as DocsPage;
@@ -50,10 +50,14 @@ test.describe('Tests for docks page', () => {
             .toString()
             .split(',')
             .join(', ')} table of contents"`, async () => {
-            await (await docsPage.getLeftMenuItemByText(rightMenuSection as string)).click();
-            for (let section of leftMenuSections) {
-                expect(await docsPage.getRightMenuItemByText(section)).toBeVisible();
-            }
+            test.step(`Going to ${rightMenuSection}`, async () => {
+                await (await docsPage.getLeftMenuItemByText(rightMenuSection as string)).click();
+            });
+            test.step(`Checking the table of contents`, async () => {
+                for (let section of leftMenuSections) {
+                    expect(await docsPage.getRightMenuItemByText(section)).toBeVisible();
+                }
+            });
         });
     }
 });
