@@ -1,4 +1,4 @@
-export const PARTNERS_LINKS = [
+export const COMPANIES_LINKS = [
     'https://code.visualstudio.com',
     'https://bing.com',
     'https://outlook.com',
