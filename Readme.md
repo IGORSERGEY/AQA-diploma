@@ -1,36 +1,36 @@
- <p align='right'>Developed by Igor Sergey</p>
-<h1 align='center'> AQA-diploma project</h1>
+<p align='right'>Developed by Igor Sergey</p>
+<h1 align='center'>AQA-diploma project</h1>
 
-Test framework includes unit, API and UI(e2e) tests
+Test framework includes unit, API, and UI (e2e) tests.
 
-## The project structure:
+## Project Structure:
 
-All tests are placed in the separate folders
+All tests are placed in separate folders.
 
 ![Untitled](README_IMAGES/root_dir.png)
 
-`.vscode`, `node_modules` and `**/assets` were added to `.gitignore` file
+The following folders/files were added to the `.gitignore` file: `.vscode`, `node_modules`, and `**/assets`.
 
-## The unit tests:
+## Unit Tests:
 
 ![Untitled](README_IMAGES/unit_dir.png)
 
-### For unit tests “jest” and “log4js” npm packages were used
+### Unit tests use the "jest" and "log4js" npm packages.
 
-For generating random values **randexp** npm was used (random_values_generator.ts)
+To generate random values, the "randexp" npm package is used (random_values_generator.ts).
 
-## The API tests:
+## API Tests:
 
 ![Untitled](README_IMAGES/api_dir.png)
 
-### For api tests “jest”, “axios” and “log4js” npm packages were used
+### API tests use the "jest", "axios", and "log4js" npm packages.
 
-For generating random values **randexp** npm was used (request_body_generator.ts)
+To generate random values, the "randexp" npm package is used (request_body_generator.ts).
 
-## The UI(e2e) tests:
+## UI (e2e) Tests:
 
 ![Untitled](README_IMAGES/e2e_dir.png)
 
-### For UI tests “playwright” framework was used
+### UI tests use the "playwright" framework.
 
-For additional reporting “allure-playwright” reporter was connected
+For additional reporting, the "allure-playwright" reporter is connected.
