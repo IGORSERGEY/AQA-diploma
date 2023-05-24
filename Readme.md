@@ -34,3 +34,7 @@ To generate random values, the "randexp" npm package is used (request_body_gener
 ### For UI tests the "playwright" framework was used.
 
 For additional reporting, the "allure-playwright" reporter is connected.
+
+## npm scripts in package.json
+
+![Untitled](README_IMAGES/package.json.scripts.png)
