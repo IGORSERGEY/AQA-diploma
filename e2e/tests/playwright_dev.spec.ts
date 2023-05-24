@@ -49,15 +49,12 @@ test.describe('Tests for "docs" page', () => {
         test(`The "${rightMenuSection}" section contains "${leftMenuSections
             .toString()
             .split(',')
-            .join(', ')} table of contents"`, async () => {
-            test.step(`Going to ${rightMenuSection}`, async () => {
-                await (await docsPage.getLeftMenuItemByText(rightMenuSection as string)).click();
-            });
-            test.step(`Checking the table of contents`, async () => {
-                for (let section of leftMenuSections) {
-                    expect(await docsPage.getRightMenuItemByText(section)).toBeVisible();
-                }
-            });
+            .join(', ')}" table of contents`, async () => {
+            await (await docsPage.getLeftMenuItemByText(rightMenuSection as string)).click();
+
+            for (let section of leftMenuSections) {
+                expect(await docsPage.isRightMenuItemVisible(section)).toBeTruthy();
+            }
         });
     }
 });
