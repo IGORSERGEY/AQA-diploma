@@ -15,7 +15,7 @@ The following folders/files were added to the `.gitignore` file: `.vscode`, `nod
 
 ![Untitled](README_IMAGES/unit_dir.png)
 
-### Unit tests use the "jest" and "log4js" npm packages.
+### For unit tests the "jest" and "log4js" npm packages were used.
 
 To generate random values, the "randexp" npm package is used (random_values_generator.ts).
 
@@ -23,7 +23,7 @@ To generate random values, the "randexp" npm package is used (random_values_gene
 
 ![Untitled](README_IMAGES/api_dir.png)
 
-### API tests use the "jest", "axios", and "log4js" npm packages.
+### For API tests the "jest", "axios", and "log4js" npm packages were used.
 
 To generate random values, the "randexp" npm package is used (request_body_generator.ts).
 
@@ -31,6 +31,6 @@ To generate random values, the "randexp" npm package is used (request_body_gener
 
 ![Untitled](README_IMAGES/e2e_dir.png)
 
-### UI tests use the "playwright" framework.
+### For UI tests the "playwright" framework was used.
 
 For additional reporting, the "allure-playwright" reporter is connected.
