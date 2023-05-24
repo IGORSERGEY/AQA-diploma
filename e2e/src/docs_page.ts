@@ -9,7 +9,9 @@ export class DocsPage extends BasePage {
     public async getLeftMenuItemByText(itemText: string) {
         return this.page.locator('a.menu__link').getByText(itemText, { exact: true }).nth(0);
     }
-    public async getRightMenuItemByText(itemText: string) {
-        return this.page.locator('a.table-of-contents__link').getByText(itemText, { exact: true });
+    public async isRightMenuItemVisible(itemText: string) {
+        return await this.page
+            .locator(`//a[contains(@class, 'table-of-contents__link') and text()="${itemText}"]`)
+            .isVisible();
     }
 }
