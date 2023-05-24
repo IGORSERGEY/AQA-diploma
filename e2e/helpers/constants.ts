@@ -62,8 +62,4 @@ export const RIGHT_MENU_SECTIONS = [
             "What's Next",
         ],
     ],
-    // ['Installation', ['API reference']],
-    // ['Installation', ['API reference']],
-    // ['Installation', ['API reference']],
-    // ['Installation', ['API reference']],
 ];
