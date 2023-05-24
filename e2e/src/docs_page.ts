@@ -6,7 +6,10 @@ export class DocsPage extends BasePage {
         super(page);
         this.Url = 'https://playwright.dev/docs/intro';
     }
-    public async getMenuItemByText(itemText: string) {
+    public async getLeftMenuItemByText(itemText: string) {
         return this.page.locator('a.menu__link').getByText(itemText);
+    }
+    public async getRightMenuItemByText(itemText: string) {
+        return this.page.locator('a.table-of-contents__link').getByText(itemText, { exact: true });
     }
 }
