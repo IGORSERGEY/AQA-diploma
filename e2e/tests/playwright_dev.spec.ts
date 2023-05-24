@@ -5,7 +5,7 @@ import { PAGES } from '../helpers/types';
 import { HEADER_SECTIONS, COMPANIES_LINKS, RIGHT_MENU_SECTIONS } from '../helpers/constants';
 import { DocsPage } from '../src/docs_page';
 
-test.describe.configure({ mode: 'serial' });
+test.describe.configure({ mode: 'parallel' });
 
 let homePage: HomePage;
 let docsPage: DocsPage;
@@ -22,7 +22,7 @@ test.describe('Tests for playwright.dev home page', () => {
         const themeAfterToggle = await homePage.getTheme();
         expect(themeBeforeToggle).not.toBe(themeAfterToggle);
     });
-    test('The buttons in "Chosen by companies" section links are correct', async () => {
+    test('The buttons in "Chosen by companies" section links have correct links', async () => {
         for (let [index, link] of COMPANIES_LINKS.entries()) {
             expect(await homePage.getPartnersButtonLinksByNumber(index + 1)).toEqual(link);
         }
