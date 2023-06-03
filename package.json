@@ -5,10 +5,10 @@
     "main": "index.js",
     "scripts": {
         "unit:test": "jest --config='unit/jest.config.json' --coverage",
-        "API:test": "jest --config='api/jest.config.json'",
-        "e2e:test": "playwright test --config=e2e/config/playwright.config.ts",
-        "e2e:report": "playwright show-report e2e/assets/reports",
-        "e2e:allure-report": "allure generate e2e/assets/allure-results --clean -o e2e/assets/allure-report && allure open e2e/assets/allure-report"
+        "api:test": "jest --config='api/jest.config.json'",
+        "ui:test": "playwright test --config=ui/config/playwright.config.ts",
+        "ui:report": "playwright show-report ui/assets/reports",
+        "ui:allure-report": "allure generate ui/assets/allure-results --clean -o ui/assets/allure-report && allure open ui/assets/allure-report"
     },
     "repository": {
         "type": "git",

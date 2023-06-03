@@ -2,9 +2,9 @@ import { Page } from '@playwright/test';
 
 export class BasePage {
     constructor(protected readonly page: Page) {}
-    protected Url!: string;
+    protected url!: string;
     public async openPage() {
-        await this.page.goto(this.Url);
+        await this.page.goto(this.url);
     }
     public async performSearch(textToSearch?: string) {
         await this.page.keyboard.press('Control+K');
