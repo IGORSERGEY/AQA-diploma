@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseUrl, maxUserId } from '../test-data/constants';
+import { baseUrl, maxUserId, missingPasswordMessage, nonExistUser } from '../test-data/constants';
 import { validateSchema } from '../helpers/schema_validator';
 import * as userListSchema from '../schema/user_list_schema.json';
 import * as userSchema from '../schema/user_schema.json';
@@ -85,7 +85,7 @@ describe('Positive API tests for reqres.in', () => {
     });
 });
 describe('Negative tests for reqres.in', () => {
-    it("Registration: Should give an error 'Missing password' when password wasn't provided", async () => {
+    it(`Registration: Should give an error '${missingPasswordMessage}' when password wasn't provided`, async () => {
         try {
             const requestBody = RequestBodyGenerator.getUserCredentialsWithoutPassword();
             apiLogger.info(`Sending request [POST] ${baseUrl}/register with body: \n${JSON.stringify(requestBody)}`);
@@ -93,10 +93,10 @@ describe('Negative tests for reqres.in', () => {
         } catch (error: any) {
             apiLogger.info(`The response is:\n${JSON.stringify(error.response.data)}`);
             expect(error.response.status).toBe(400);
-            expect(error.response.data.error).toBe('Missing password');
+            expect(error.response.data.error).toBe(missingPasswordMessage);
         }
     });
-    it("Login: Should give an error 'Missing password' when password wasn't provided", async () => {
+    it(`Login: Should give an error '${missingPasswordMessage}' when password wasn't provided`, async () => {
         try {
             const requestBody = RequestBodyGenerator.getUserCredentialsWithoutPassword();
             apiLogger.info(`Sending request [POST] ${baseUrl}/register with body: \n${JSON.stringify(requestBody)}`);
@@ -104,13 +104,13 @@ describe('Negative tests for reqres.in', () => {
         } catch (error: any) {
             apiLogger.info(`The response is:\n${JSON.stringify(error.response.data)}`);
             expect(error.response.status).toBe(400);
-            expect(error.response.data.error).toBe('Missing password');
+            expect(error.response.data.error).toBe(missingPasswordMessage);
         }
     });
     it('Should get 404 error when trying to find nonexistent user', async () => {
         try {
-            apiLogger.info(`Sending request [GET] ${baseUrl}/users/99999999999999`);
-            await axios.get(baseUrl + `/users/99999999999999`);
+            apiLogger.info(`Sending request [GET] ${baseUrl}/users/${nonExistUser}`);
+            await axios.get(baseUrl + `/users/${nonExistUser}`);
         } catch (error: any) {
             apiLogger.info(`The response is:\n${JSON.stringify(error.response.data)}`);
             expect(error.response.status).toBe(404);
