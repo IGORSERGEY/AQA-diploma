@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseUrl, maxUserId, missingPasswordMessage, nonExistUser } from '../test-data/constants';
+import { baseUrl, maxUserId, missingPasswordMessage, nonExistUser, usersPage } from '../test-data/constants';
 import { validateSchema } from '../helpers/schema_validator';
 import * as userListSchema from '../schema/user_list_schema.json';
 import * as userSchema from '../schema/user_schema.json';
@@ -14,7 +14,7 @@ describe('Positive API tests for reqres.in', () => {
         apiLogger.info(`Sending request [GET] ${baseUrl}/users ...`);
         let response = await axios.get(baseUrl + '/users', {
             params: {
-                page: 1,
+                page: usersPage,
                 per_page: maxUserId,
             },
         });
@@ -22,7 +22,7 @@ describe('Positive API tests for reqres.in', () => {
         expect(response.status).toBe(200);
         validateSchema(userListSchema, response.data);
         expect(response.data.per_page).toBe(maxUserId);
-        expect(response.data.page).toBe(1);
+        expect(response.data.page).toBe(usersPage);
     });
 
     it('Should create user', async () => {
