@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { baseUrl, maxUserId, missingPasswordMessage, nonExistUser, usersPage } from '../test-data/constants';
 import { validateSchema } from '../helpers/schema_validator';
 import * as userListSchema from '../schema/user_list_schema.json';
@@ -6,13 +5,14 @@ import * as userSchema from '../schema/user_schema.json';
 import * as registrationResponseSchema from '../schema/registration_response_schema.json';
 import { RequestBodyGenerator, randomUserIdNumber } from '../helpers/request_body_generator';
 import { apiLogger } from '../config/logger.config';
+import { reqres } from '../config/axios.config';
 
 describe('Positive API tests for reqres.in', () => {
     const userId = randomUserIdNumber;
 
     it('Should get users list', async () => {
         apiLogger.info(`Sending request [GET] ${baseUrl}/users ...`);
-        let response = await axios.get(baseUrl + '/users', {
+        let response = await reqres.get('/users', {
             params: {
                 page: usersPage,
                 per_page: maxUserId,
@@ -28,7 +28,7 @@ describe('Positive API tests for reqres.in', () => {
     it('Should create user', async () => {
         const requestBody = RequestBodyGenerator.getUserToCreate();
         apiLogger.info(`Sending request [POST] ${baseUrl}/users with body: \n${JSON.stringify(requestBody)}`);
-        let response = await axios.post(baseUrl + '/users', requestBody);
+        let response = await reqres.post(baseUrl + '/users', requestBody);
         apiLogger.info(`The response is:\n${JSON.stringify(response.data)}`);
 
         expect(response.status).toBe(201);
@@ -36,7 +36,7 @@ describe('Positive API tests for reqres.in', () => {
     });
     it(`Should find user №${userId} by id`, async () => {
         apiLogger.info(`Sending request [GET] ${baseUrl}/users/${userId} ...`);
-        let response = await axios.get(baseUrl + `/users/${userId}`);
+        let response = await reqres.get(baseUrl + `/users/${userId}`);
         apiLogger.info(`The response is:\n${JSON.stringify(response.data)}`);
 
         expect(response.data.data.id).toBe(userId);
@@ -45,7 +45,7 @@ describe('Positive API tests for reqres.in', () => {
     it(`Should update user №${userId}`, async () => {
         const requestBody = RequestBodyGenerator.getUserForUpdate(userId);
         apiLogger.info(`Sending request [PUT] ${baseUrl}/users/${userId} with body: \n${JSON.stringify(requestBody)}`);
-        let response = await axios.put(baseUrl + `/users/${userId}`, requestBody);
+        let response = await reqres.put(baseUrl + `/users/${userId}`, requestBody);
         apiLogger.info(`The response is:\n${JSON.stringify(response.data)}`);
 
         expect(response.status).toBe(200);
@@ -55,11 +55,11 @@ describe('Positive API tests for reqres.in', () => {
     });
     it(`Should update user's №${userId} email`, async () => {
         apiLogger.info(`Sending request [GET] ${baseUrl}/users/${userId} ...`);
-        let responseBefore = await axios.get(baseUrl + `/users/${userId}`);
+        let responseBefore = await reqres.get(baseUrl + `/users/${userId}`);
         apiLogger.info(`The response before patching is:\n${JSON.stringify(responseBefore.data)}`);
         const requestBody = RequestBodyGenerator.getUserForUpdate(userId);
         apiLogger.info(`Sending request [PATCH] ${baseUrl}/users with body: \n${JSON.stringify(requestBody)}`);
-        let responseAfter = await axios.patch(baseUrl + `/users/${userId}`, requestBody);
+        let responseAfter = await reqres.patch(baseUrl + `/users/${userId}`, requestBody);
         apiLogger.info(`The response after patching is:\n${JSON.stringify(responseAfter.data)}`);
 
         expect(responseAfter.status).toBe(200);
@@ -71,14 +71,14 @@ describe('Positive API tests for reqres.in', () => {
 
     it(`Should delete user №${userId}`, async () => {
         apiLogger.info(`Sending request [DELETE] ${baseUrl}/users/${userId} ...`);
-        let response = await axios.delete(baseUrl + `/users/${userId}`);
+        let response = await reqres.delete(baseUrl + `/users/${userId}`);
         apiLogger.info(`The response is:\n${JSON.stringify(response.data)}`);
         expect(response.status).toBe(204);
     });
     it('Should register a user', async () => {
         const requestBody = RequestBodyGenerator.getUserCredentials();
         apiLogger.info(`Sending request [POST] ${baseUrl}/users/${userId} with body: \n${JSON.stringify(requestBody)}`);
-        let response = await axios.post(baseUrl + '/register', requestBody);
+        let response = await reqres.post(baseUrl + '/register', requestBody);
         apiLogger.info(`The response is:\n${JSON.stringify(response.data)}`);
         expect(response.status).toBe(200);
         validateSchema(registrationResponseSchema, response.data);
@@ -89,7 +89,7 @@ describe('Negative tests for reqres.in', () => {
         try {
             const requestBody = RequestBodyGenerator.getUserCredentialsWithoutPassword();
             apiLogger.info(`Sending request [POST] ${baseUrl}/register with body: \n${JSON.stringify(requestBody)}`);
-            await axios.post(baseUrl + '/register', requestBody);
+            await reqres.post(baseUrl + '/register', requestBody);
         } catch (error: any) {
             apiLogger.info(`The response is:\n${JSON.stringify(error.response.data)}`);
             expect(error.response.status).toBe(400);
@@ -100,7 +100,7 @@ describe('Negative tests for reqres.in', () => {
         try {
             const requestBody = RequestBodyGenerator.getUserCredentialsWithoutPassword();
             apiLogger.info(`Sending request [POST] ${baseUrl}/register with body: \n${JSON.stringify(requestBody)}`);
-            await axios.post(baseUrl + '/login', requestBody);
+            await reqres.post(baseUrl + '/login', requestBody);
         } catch (error: any) {
             apiLogger.info(`The response is:\n${JSON.stringify(error.response.data)}`);
             expect(error.response.status).toBe(400);
@@ -110,7 +110,7 @@ describe('Negative tests for reqres.in', () => {
     it('Should get 404 error when trying to find nonexistent user', async () => {
         try {
             apiLogger.info(`Sending request [GET] ${baseUrl}/users/${nonExistUser}`);
-            await axios.get(baseUrl + `/users/${nonExistUser}`);
+            await reqres.get(baseUrl + `/users/${nonExistUser}`);
         } catch (error: any) {
             apiLogger.info(`The response is:\n${JSON.stringify(error.response.data)}`);
             expect(error.response.status).toBe(404);
