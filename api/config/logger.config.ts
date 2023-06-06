@@ -15,7 +15,7 @@ log4js.configure({
             type: 'console',
         },
     },
-    categories: { default: { appenders: ['fullLog', 'console'], level: 'debug' } },
+    categories: { default: { appenders: ['fullLog'], level: 'debug' } },
 });
 
 export const apiLogger = log4js.getLogger();
