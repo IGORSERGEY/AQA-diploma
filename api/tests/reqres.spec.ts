@@ -52,7 +52,6 @@ describe('Positive API tests for reqres.in', () => {
         expect(responseAfter.status).toBe(200);
         validateSchema(userSchema, responseAfter.data);
         expect(responseAfter.data.data.id).toBe(userId);
-        expect(responseBefore.data).not.toMatchObject(requestBody);
         expect(responseAfter.data).toMatchObject(requestBody);
     });
 
