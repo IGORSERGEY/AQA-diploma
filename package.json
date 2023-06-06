@@ -32,6 +32,7 @@
         "allure-commandline": "^2.22.1",
         "allure-playwright": "^2.3.0",
         "axios": "^1.4.0",
+        "axios-logger": "^2.6.2",
         "jest": "^29.5.0",
         "prettier": "2.8.8",
         "randexp": "^0.5.3",
