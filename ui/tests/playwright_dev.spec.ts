@@ -39,7 +39,7 @@ test.describe('Tests for "docs" page', () => {
         docsPage = PageFactory.getPage(page, PAGES.DOCKS) as DocsPage;
         await docsPage.openPage();
     });
-    for (let [section, menuItem] of HEADER_SECTIONS) {
+    for (const [section, menuItem] of Array.from(HEADER_SECTIONS)) {
         test(`Can open ${section} section and see ${menuItem} left menu item`, async () => {
             await docsPage.clickHeaderButtonByText(section);
             expect(await docsPage.getLeftMenuItemByText(menuItem)).toBeVisible();

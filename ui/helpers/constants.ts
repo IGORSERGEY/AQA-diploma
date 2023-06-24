@@ -10,11 +10,11 @@ export const COMPANIES_LINKS = [
     'https://accessibilityinsights.io/',
 ];
 
-export const HEADER_SECTIONS = [
+export const HEADER_SECTIONS = new Map([
     ['API', 'API reference'],
     ['Community', 'Welcome'],
     ['Docs', 'Writing tests'],
-];
+]);
 
 export const RIGHT_MENU_SECTIONS = [
     ['Installation', ['Installing Playwright', "What's Installed", 'Running the Example Test', 'HTML Test Reports']],
