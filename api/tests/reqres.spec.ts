@@ -33,8 +33,8 @@ describe('Positive API tests for reqres.in', () => {
     it(`Should find user №${userId} by id`, async () => {
         let response = await reqres.get(baseUrl + `/users/${userId}`);
 
-        expect(response.data.data.id).toBe(userId);
         validateSchema(userSchema, response.data);
+        expect(response.data.data.id).toBe(userId);
     });
     it(`Should update user №${userId}`, async () => {
         const requestBody = RequestBodyGenerator.getUserForUpdate(userId);
@@ -46,14 +46,13 @@ describe('Positive API tests for reqres.in', () => {
         expect(response.data).toMatchObject(requestBody);
     });
     it(`Should update user's №${userId} email`, async () => {
-        let responseBefore = await reqres.get(baseUrl + `/users/${userId}`);
         const requestBody = RequestBodyGenerator.getUserForUpdate(userId);
-        let responseAfter = await reqres.patch(baseUrl + `/users/${userId}`, requestBody);
+        let response = await reqres.patch(baseUrl + `/users/${userId}`, requestBody);
 
-        expect(responseAfter.status).toBe(200);
-        validateSchema(userSchema, responseAfter.data);
-        expect(responseAfter.data.data.id).toBe(userId);
-        expect(responseAfter.data).toMatchObject(requestBody);
+        expect(response.status).toBe(200);
+        validateSchema(userSchema, response.data);
+        expect(response.data.data.id).toBe(userId);
+        expect(response.data).toMatchObject(requestBody);
     });
 
     it(`Should delete user №${userId}`, async () => {
