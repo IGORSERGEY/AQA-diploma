@@ -42,7 +42,7 @@ test.describe('Tests for "docs" page', () => {
     for (const [section, menuItem] of Array.from(HEADER_SECTIONS)) {
         test(`Can open ${section} section and see ${menuItem} left menu item`, async () => {
             await docsPage.clickHeaderButtonByText(section);
-            expect(await docsPage.getLeftMenuItemByText(menuItem)).toBeVisible();
+            await expect(await docsPage.getLeftMenuItemByText(menuItem)).toBeVisible();
         });
     }
     for (const [rightMenuSection, leftMenuSections] of Array.from(RIGHT_MENU_SECTIONS)) {
