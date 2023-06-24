@@ -5,6 +5,9 @@ import * as userSchema from '../schema/user_schema.json';
 import * as registrationResponseSchema from '../schema/registration_response_schema.json';
 import { RequestBodyGenerator, randomUserIdNumber } from '../helpers/request_body_generator';
 import { reqres } from '../config/axios.config';
+import { AxiosResponse } from 'axios';
+
+let response: AxiosResponse<any, any>;
 
 describe('Positive API tests for reqres.in', () => {
     const userId = randomUserIdNumber;
@@ -14,7 +17,7 @@ describe('Positive API tests for reqres.in', () => {
             page: usersPage,
             per_page: maxUserId,
         };
-        let response = await reqres.get('/users', {
+        response = await reqres.get('/users', {
             params,
         });
         expect(response.status).toBe(200);
@@ -25,20 +28,20 @@ describe('Positive API tests for reqres.in', () => {
 
     it('Should create user', async () => {
         const requestBody = RequestBodyGenerator.getUserToCreate();
-        let response = await reqres.post(baseUrl + '/users', requestBody);
+        response = await reqres.post(baseUrl + '/users', requestBody);
 
         expect(response.status).toBe(201);
         expect(response.data).toMatchObject(requestBody);
     });
     it(`Should find user №${userId} by id`, async () => {
-        let response = await reqres.get(baseUrl + `/users/${userId}`);
+        response = await reqres.get(baseUrl + `/users/${userId}`);
 
         validateSchema(userSchema, response.data);
         expect(response.data.data.id).toBe(userId);
     });
     it(`Should update user №${userId}`, async () => {
         const requestBody = RequestBodyGenerator.getUserForUpdate(userId);
-        let response = await reqres.put(baseUrl + `/users/${userId}`, requestBody);
+        response = await reqres.put(baseUrl + `/users/${userId}`, requestBody);
 
         expect(response.status).toBe(200);
         validateSchema(userSchema, response.data);
@@ -47,7 +50,7 @@ describe('Positive API tests for reqres.in', () => {
     });
     it(`Should update user's №${userId} email`, async () => {
         const requestBody = RequestBodyGenerator.getUserForUpdate(userId);
-        let response = await reqres.patch(baseUrl + `/users/${userId}`, requestBody);
+        response = await reqres.patch(baseUrl + `/users/${userId}`, requestBody);
 
         expect(response.status).toBe(200);
         validateSchema(userSchema, response.data);
@@ -56,12 +59,12 @@ describe('Positive API tests for reqres.in', () => {
     });
 
     it(`Should delete user №${userId}`, async () => {
-        let response = await reqres.delete(baseUrl + `/users/${userId}`);
+        response = await reqres.delete(baseUrl + `/users/${userId}`);
         expect(response.status).toBe(204);
     });
     it('Should register a user', async () => {
         const requestBody = RequestBodyGenerator.getUserCredentials();
-        let response = await reqres.post(baseUrl + '/register', requestBody);
+        response = await reqres.post(baseUrl + '/register', requestBody);
         expect(response.status).toBe(200);
         validateSchema(registrationResponseSchema, response.data);
     });
