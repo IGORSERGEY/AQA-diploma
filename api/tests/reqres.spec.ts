@@ -10,11 +10,12 @@ describe('Positive API tests for reqres.in', () => {
     const userId = randomUserIdNumber;
 
     it('Should get users list', async () => {
+        const params = {
+            page: usersPage,
+            per_page: maxUserId,
+        };
         let response = await reqres.get('/users', {
-            params: {
-                page: usersPage,
-                per_page: maxUserId,
-            },
+            params,
         });
         expect(response.status).toBe(200);
         validateSchema(userListSchema, response.data);
