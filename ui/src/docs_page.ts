@@ -6,8 +6,8 @@ export class DocsPage extends BasePage {
         super(page);
         this.url = 'https://playwright.dev/docs/intro';
     }
-    public async getLeftMenuItemByText(itemText: string) {
-        return this.page.locator('a.menu__link').getByText(itemText, { exact: true }).nth(0);
+    public getLeftMenuItemByText(itemText: string) {
+        this.page.locator('a.menu__link').getByText(itemText, { exact: true }).nth(0);
     }
     public async isRightMenuItemVisible(itemText: string) {
         return await this.page
