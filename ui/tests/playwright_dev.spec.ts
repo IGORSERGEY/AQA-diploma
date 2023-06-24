@@ -45,7 +45,7 @@ test.describe('Tests for "docs" page', () => {
             expect(await docsPage.getLeftMenuItemByText(menuItem)).toBeVisible();
         });
     }
-    for (let [rightMenuSection, leftMenuSections] of RIGHT_MENU_SECTIONS) {
+    for (const [rightMenuSection, leftMenuSections] of Array.from(RIGHT_MENU_SECTIONS)) {
         test(`The "${rightMenuSection}" section contains "${leftMenuSections
             .toString()
             .split(',')

@@ -16,7 +16,7 @@ export const HEADER_SECTIONS = new Map([
     ['Docs', 'Writing tests'],
 ]);
 
-export const RIGHT_MENU_SECTIONS = [
+export const RIGHT_MENU_SECTIONS = new Map([
     ['Installation', ['Installing Playwright', "What's Installed", 'Running the Example Test', 'HTML Test Reports']],
     [
         'Writing tests',
@@ -62,4 +62,4 @@ export const RIGHT_MENU_SECTIONS = [
             "What's Next",
         ],
     ],
-];
+]);
