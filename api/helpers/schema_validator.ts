@@ -1,5 +1,4 @@
 import Ajv from 'ajv';
-// import { apiLogger } from '../config/logger.config';
 
 const ajv = new Ajv();
 
