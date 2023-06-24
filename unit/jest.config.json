@@ -1,0 +1,6 @@
+{
+    "testMatch": ["**/unit/tests/*.spec.ts"],
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "coverageDirectory": "../unit/assets/coverage"
+}
