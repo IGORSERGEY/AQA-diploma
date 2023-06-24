@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { baseUrl } from '../test-data/constants';
 import * as AxiosLogger from 'axios-logger';
 import { apiLogger } from './logger.config';
@@ -14,20 +14,25 @@ const axiosLoggerConfig = {
 };
 
 reqres.interceptors.request.use(function (request) {
-    apiLogger.info(`Request: ${request.method} ${request.url} ${request.data ? JSON.stringify(request.data) : ''}`);
-    AxiosLogger.requestLogger(request, axiosLoggerConfig);
+    AxiosLogger.requestLogger(request, {
+        ...axiosLoggerConfig,
+        logger: apiLogger.info.bind(apiLogger),
+    });
     return request;
 });
 reqres.interceptors.response.use(
     function (response) {
-        apiLogger.info(`Response: ${JSON.stringify(response.data)}`);
-        return AxiosLogger.responseLogger(response, axiosLoggerConfig);
+        return AxiosLogger.responseLogger(response, {
+            ...axiosLoggerConfig,
+            logger: apiLogger.info.bind(apiLogger),
+        });
     },
     function (error) {
         apiLogger.error(`${error.message}`);
         return AxiosLogger.errorLogger(error, {
             ...axiosLoggerConfig,
             prefixText: 'ERROR',
+            logger: apiLogger.error.bind(apiLogger),
         });
     }
 );
